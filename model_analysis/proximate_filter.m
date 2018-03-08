@@ -2,7 +2,7 @@
 dir_str = '~/Dropbox/glasso/concord_results';
 incov_str = 'chosen_incov.csv';
 
-% create proximity mask
+% create proximate mask
 node_num = 83;
 prox_mask = t_edge_adjacency_mask(node_num);
 
