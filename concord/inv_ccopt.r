@@ -29,7 +29,7 @@ pMat <- mat_data$M
 dim <- dim(pMat)
 print(dim)
 
-inv_cov<-gconcordopt::concordista(cc, lam=0.01, pMat=pMat)
+inv_cov<-gconcordopt::concordista(cc, lam=0.00001, pMat=pMat)
 nonzero <- function(x) sum(x != 0)
 print(nonzero(inv_cov))
 print((nonzero(inv_cov)-vec_dim)/(vec_dim*vec_dim-vec_dim))
