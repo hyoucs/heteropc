@@ -77,10 +77,11 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
       if(pMat(i,j)==1){
         LambdaMat(i,j) = lam;
       }else{
-        LambdaMat(i,j) = lam*1000;
+        LambdaMat(i,j) = lam*100;
       }
     }
   }
+
   // LambdaMat.setConstant(lam);
   if (penalize_diag == 0) {
     LambdaMat.diagonal().setZero().eval();
@@ -285,7 +286,7 @@ SEXP cc_fista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
       if(pMat(i,j)==1){
         LambdaMat(i,j) = lam;
       }else{
-        LambdaMat(i,j) = lam*1000;
+        LambdaMat(i,j) = lam*100;
       }
     }
   }
@@ -507,7 +508,7 @@ SEXP cc_elastic_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
       if(pMat(i,j)==1){
         LambdaMat(i,j) = lam;
       }else{
-        LambdaMat(i,j) = lam*1000;
+        LambdaMat(i,j) = lam*100;
       }
     }
   }

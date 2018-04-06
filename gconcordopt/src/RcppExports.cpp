@@ -15,7 +15,7 @@ BEGIN_RCPP
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type D(DSEXP );
         Rcpp::traits::input_parameter< double >::type lam(lamSEXP );
-        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type pMat(DSEXP );
+        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> & >::type pMat(pMatSEXP );
         Rcpp::traits::input_parameter< const Eigen::MappedSparseMatrix<double>& >::type X0_(X0_SEXP );
         Rcpp::traits::input_parameter< int >::type penalize_diag(penalize_diagSEXP );
         Rcpp::traits::input_parameter< int >::type BBstep(BBstepSEXP );
@@ -40,7 +40,7 @@ BEGIN_RCPP
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type D(DSEXP );
         Rcpp::traits::input_parameter< double >::type lam(lamSEXP );
-        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type pMat(DSEXP );
+        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type pMat(pMatSEXP );
         Rcpp::traits::input_parameter< const Eigen::MappedSparseMatrix<double>& >::type X0_(X0_SEXP );
         Rcpp::traits::input_parameter< int >::type penalize_diag(penalize_diagSEXP );
         Rcpp::traits::input_parameter< int >::type steptype(steptypeSEXP );
@@ -65,7 +65,7 @@ BEGIN_RCPP
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type D(DSEXP );
         Rcpp::traits::input_parameter< double >::type lam(lamSEXP );
-        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type pMat(DSEXP );
+        Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd>& >::type pMat(pMatSEXP );
         Rcpp::traits::input_parameter< int >::type penalize_diag(penalize_diagSEXP );
         Rcpp::traits::input_parameter< int >::type BBstep(BBstepSEXP );
         Rcpp::traits::input_parameter< double >::type tol(tolSEXP );
