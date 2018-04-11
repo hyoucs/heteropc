@@ -5,7 +5,7 @@ pMat <- mat_data$M
 dimM <- dim(pMat)
 print(dimM)
 
-load('~/Dropbox/glasso/concord_results/GAMBLING/lam5.5e-4_nz244.Rdata')
+load('~/Dropbox/glasso/concord_results/RELATIONAL/lam7.3e-3_nz226.Rdata')
 num_diag <- dim(inv_cov)[1]
 idx <- which(inv_cov!=0,arr.ind=T)
 

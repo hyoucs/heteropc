@@ -2,7 +2,7 @@ library('R.matlab')
 library(gconcordopt)
 library(MASS)
 
-mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-GAMBLING.mat')
+mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-RELATIONAL.mat')
 data <- mat_data$X
 dim <- dim(data)
 print(dim)
@@ -30,8 +30,8 @@ pMat <- mat_data$M
 dim <- dim(pMat)
 print(dim)
 
-inv_cov<-gconcordopt::concordista(cc, lam=0.0055, pMat=pMat)
+inv_cov<-gconcordopt::concordista(cc, lam=0.0073, pMat=pMat)
 nonzero <- function(x) sum(x != 0)
 print(nonzero(inv_cov)-vec_dim)
 # print((nonzero(inv_cov)-vec_dim)/(vec_dim*vec_dim-vec_dim))
-save(inv_cov,file='lam5.5e-4_nz.Rdata')
+save(inv_cov,file='~/Dropbox/glasso/concord_results/RELATIONAL/lam7.3e-3_nz.Rdata')
