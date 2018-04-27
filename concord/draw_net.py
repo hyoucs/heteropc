@@ -8,10 +8,96 @@ import networkx as nx
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-mat1 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/EMOTION/emotion.mat')
+mat1 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/RELATIONAL/relational.mat')
 invcov1 = mat1['invcov']
-mat2 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/RELATIONAL/relational.mat')
+mat2 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/GAMBLING/gambling.mat')
 invcov2 = mat2['invcov']
+
+r_name = [
+'lateralorbitofrontal-l',
+'parsorbitalis-l',
+'frontalpole-l',
+'medialorbitofrontal-l',
+'parstriangularis-l',
+'parsopercularis-l',
+'rostralmiddlefrontal-l',
+'superiorfrontal-l',
+'caudalmiddlefrontal-l',
+'precentral-l',
+'paracentral-l',
+'rostralanteriorcingulate-l',
+'caudalanteriorcingulate-l',
+'posteriorcingulate-l',
+'isthmuscingulate-l',
+'postcentral-l',
+'supramarginal-l',
+'superiorparietal-l',
+'inferiorparietal-l',
+'precuneus-l',
+'cuneus-l',
+'pericalcarine-l',
+'lateraloccipital-l',
+'lingual-l',
+'fusiform-l',
+'parahippocampal-l',
+'entorhinal-l',
+'temporalpole-l',
+'inferiortemporal-l',
+'middletemporal-l',
+'bankssts-l',
+'superiortemporal-l',
+'transversetemporal-l',
+'insula-l',
+'thalamusproper-l',
+'caudate-l',
+'putamen-l',
+'pallidum-l',
+'accumbensarea-l',
+'hyppocampus-l',
+'amygdala-l',
+'lateralorbitofrontal-r',
+'parsorbitalis-r',
+'frontalpole-r',
+'medialorbitofrontal-r',
+'parstriangularis-r',
+'parsopercularis-r',
+'rostralmiddlefrontal-r',
+'superiorfrontal-r',
+'caudalmiddlefrontal-r',
+'precentral-r',
+'paracentral-r',
+'rostralanteriorcingulate-r',
+'caudalanteriorcingulate-r',
+'posteriorcingulate-r',
+'isthmuscingulate-r',
+'postcentral-r',
+'supramarginal-r',
+'superiorparietal-r',
+'inferiorparietal-r',
+'precuneus-r',
+'cuneus-r',
+'pericalcarine-r',
+'lateraloccipital-r',
+'lingual-r',
+'fusiform-r',
+'parahippocampal-r',
+'entorhinal-r',
+'temporalpole-r',
+'inferiortemporal-r',
+'middletemporal-r',
+'bankssts-r',
+'superiortemporal-r',
+'transversetemporal-r',
+'insula-r',
+'thalamusproper-r',
+'caudate-r',
+'putamen-r',
+'pallidum-r',
+'accumbensarea-r',
+'hyppocampus-r',
+'amygdala-r',
+'brainstem'
+]
 
 [d,_] = invcov1.shape #dim: 3403*3403
 r = 83 #num_regions
@@ -45,5 +131,9 @@ G.remove_nodes_from(to_del)
 ## Draw
 options = {'node_color': '#FA8072', 'edge_color': '#2C3E50', 
 			'node_size': 400,'width': 0.8,}
+labels = {}
+for i in range(r):
+	labels[i]=r_name[i]
+G = nx.relabel_nodes(G,labels)
 nx.draw(G, with_labels=True, **options) #font_weight='bold'
 plt.show()

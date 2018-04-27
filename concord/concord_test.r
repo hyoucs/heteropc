@@ -1,13 +1,14 @@
 library('R.matlab')
 library('MVN')
 library('gconcord')
+library(beepr)
 
-mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-GAMBLING.mat')
+mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-EMOTION.mat')
 data <- mat_data$X
 dim <- dim(data)
 print(dim)
 
-# Create 51 vetors, each with (83*82)/2 dims
+# Create 51 vectors, each with (83*82)/2 dims
 vec_dim <- dim[1]*(dim[2]-1)/2
 vectors <- matrix(0L,nrow=dim[3], ncol=vec_dim)
 
@@ -21,9 +22,14 @@ for(i in 1:(dim[1]-1)){
 		counter <- counter+1
 	}
 }
-
-cc <- cov(vectors)
-inv_cov<-concord(cc,0.001)
+print(dim(vectors))
+# cc <- cov(vectors)
+# print(dim(cc))
 nonzero <- function(x) sum(x != 0)
-print(nonzero(inv_cov))
-print((nonzero(inv_cov)-vec_dim)/(vec_dim*vec_dim-vec_dim))
+
+inv_cov<-concord(vectors,0.6)
+print(nonzero(inv_cov)-vec_dim)
+writeMat('~/Dropbox/glasso/concord_results/EMOTION/0.42_.mat', M=inv_cov)
+beep()
+# print(nonzero(inv_cov))
+# print((nonzero(inv_cov)-vec_dim)/(vec_dim*vec_dim-vec_dim))

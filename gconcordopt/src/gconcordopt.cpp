@@ -76,12 +76,14 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
     for(int i=0; i<p; i++){
       if(pMat(i,j)==1){
         LambdaMat(i,j) = lam;
+        // if(i==j){
+        //   LambdaMat(i,j) = lam/10;
+        // }
       }else{
         LambdaMat(i,j) = lam*100;
       }
     }
   }
-
   // LambdaMat.setConstant(lam);
   if (penalize_diag == 0) {
     LambdaMat.diagonal().setZero().eval();
@@ -198,6 +200,9 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
 
     X = Xn; h = hn; G = Gn;
     f = h + Xn.cwiseAbs().cwiseProduct(LambdaMat).sum();
+    // cout<<"1st term: "<<- Xn.diagonal().array().log().sum()<<"; 2nd term: "<<0.5*(Xn*Wn).trace()<<endl;
+    // cout<<"Likelihood: "<<h<<endl;
+    // cout<<"L1 penality: "<<f-h<<endl;
 
     if (info) {
       fhist(itr) = f;    
@@ -224,7 +229,9 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
     }
 
   }
-
+  cout<<"Likelihood: "<<h<<endl;
+  cout<<"L1 penality: "<<f-h<<endl;
+  
   if (info) {
     return List::create(Named("omega") = wrap(Xn),
 			Named("itr") = itr,
@@ -653,6 +660,9 @@ SEXP cc_elastic_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
     }
 
   }
+
+  cout<<"Likelihood: "<<h<<endl;
+  cout<<"L1 penality: "<<f-h<<endl;
 
   if (info) {
     return List::create(Named("omega") = wrap(Xn),
