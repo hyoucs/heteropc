@@ -5,7 +5,7 @@ library(gconcordopt)
 library(MASS)
 library(beepr)
 
-mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-EMOTION.mat')
+mat_data <- readMat('~/Dropbox/glasso/data/HCP-V1/tfMRI-GAMBLING.mat')
 data <- mat_data$X
 dim <- dim(data)
 print(dim)
@@ -28,15 +28,29 @@ print(dim(vectors))
 
 # writeMat('~/Dropbox/glasso/concord_results/EMOTION/data.mat',M=vectors)
 
-mat_data <- readMat('~/Dropbox/glasso/pMask.mat')
-pMat <- mat_data$M
-
+# mat_data <- readMat('~/Dropbox/glasso/pMask.mat')
+# pMat <- mat_data$M
+nonzero <- function(x) sum(x != 0)
 ####### glasso #######
 # cc <- cov(vectors)
 # a <- glasso(cc,0.11,penalize.diagonal=FALSE)
 # inv_cov <- a$wi
 ####### concord-ista #######
-inv_cov <- gconcordopt::concordista(vectors, lam=0.23, pMat=pMat)
+for(i in seq(0.3,0.3,by=0.01)){
+	# inv_cov <- gconcordopt::concordista(vectors, lam=i, pMat=pMat)
+	inv_cov <- gconcordopt::concordista(vectors, lam=i)
+	##
+	# tmp <- inv_cov
+	# diag(tmp) <- 0
+	# th <- abs(max(tmp))/100
+	# inv_cov[abs(inv_cov) < th] <- 0
+
+	print(nonzero(inv_cov)-vec_dim)
+
+	fname = paste0('g_result/',toString(i),'_.mat')
+	writeMat(fname, M=inv_cov)
+}
+
 ####### concord #######
 # inv_cov <- concord(vectors,0.6)
 ####### space #######
@@ -54,13 +68,8 @@ inv_cov <- gconcordopt::concordista(vectors, lam=0.23, pMat=pMat)
 # a <- space.joint(vectors, lam1=l1*n*0.03, iter=iter)
 # inv_cov <- a$ParCor
 #####################
-tmp <- inv_cov
-diag(tmp) <- 0
-th <- abs(max(tmp))/100
-inv_cov[abs(inv_cov) < th] <- 0
 
-nonzero <- function(x) sum(x != 0)
-print(nonzero(inv_cov)-vec_dim)
+
 # print((nonzero(inv_cov)-vec_dim)/(vec_dim*vec_dim-vec_dim))
 # save(inv_cov,file='~/Dropbox/glasso/concord_results/RELATIONAL/7.3e-3_.Rdata')
 # writeMat('~/Dropbox/glasso/concord_results/EMOTION/0.15_.mat', M=inv_cov)

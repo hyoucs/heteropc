@@ -80,7 +80,7 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
         //   LambdaMat(i,j) = lam/10;
         // }
       }else{
-        LambdaMat(i,j) = lam*100;
+        LambdaMat(i,j) = lam; //*100
       }
     }
   }
@@ -229,8 +229,8 @@ SEXP cc_ista(const Eigen::Map<Eigen::MatrixXd> & D, double lam,
     }
 
   }
-  cout<<"Likelihood: "<<h<<endl;
-  cout<<"L1 penality: "<<f-h<<endl;
+  cout<<"Likelihood "<<h<<endl;
+  cout<<"L1 penality "<<f-h<<endl;
   
   if (info) {
     return List::create(Named("omega") = wrap(Xn),

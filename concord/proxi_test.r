@@ -5,8 +5,9 @@ pMat <- mat_data$M
 dimM <- dim(pMat)
 print(dimM)
 
-inv_cov <- readMat('~/Dropbox/glasso/concord_results/EMOTION/3e-4_160_2.mat')
-inv_cov <- inv_cov$inv
+# inv_cov <- readMat('~/Dropbox/glasso/concord_results/GAMBLING/0.32__s.mat')
+inv_cov <- readMat('g_result/0.3_.mat')
+inv_cov <- inv_cov$M
 print(dim(inv_cov))
 num_diag <- dim(inv_cov)[1]
 idx <- which(inv_cov!=0,arr.ind=T)
