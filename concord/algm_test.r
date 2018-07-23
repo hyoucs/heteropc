@@ -7,10 +7,10 @@ library(space)
 
 library(MASS)
 
-# p = 10
-# omega = diag(p)
-# omega[1,5] = omega[5,1] = .99
-# omega[2,6] = omega[6,2] = .99
+p = 10
+omega = diag(p)
+omega[1,5] = omega[5,1] = .99
+omega[2,6] = omega[6,2] = .99
 # sigma = solve(omega)
 
 # vectors = mvrnorm(200, mu=rep(0, p), Sigma=sigma)
@@ -36,7 +36,7 @@ inv_cov <- gconcordopt::concordista(vectors, lam=0.5, pMat=pMat)
 # inv_cov <- concord(vectors,0.6)
 # print(inv_cov)
 ####### space #######
-## Standardize
+# # Standardize
 # vectors <- sweep(vectors, 2L, colMeans(vectors)) #col mean zero
 # L2 <- function(x){return(sqrt(sum(x^2)))}
 # col_norm <- apply(vectors, 2, L2)

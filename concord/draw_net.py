@@ -151,7 +151,7 @@ for i in range(p):
 plot(omega1)
 
 ##### Plot network from a single result #####
-mat = loadmat('/Users/LSK/Dropbox/glasso/concord_results/cross_func/g_e(114)/0.311_114.mat')
+mat = loadmat('/Users/LSK/Dropbox/glasso/concord_results/cross_func/g_e/0.311_114.mat')
 omega2 = mat['S']
 omega2 = omega2.toarray()
 plot(omega2)

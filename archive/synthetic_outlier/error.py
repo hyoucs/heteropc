@@ -5,11 +5,10 @@ import numpy as np
 from scipy.io import loadmat
 
 # Const to change
-lam = 0.255
+lam = 0.2
 # Data
-mat1 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/WM/no_c/0.255_s.mat')
-Omega = mat1['S']
-Omega = Omega.toarray()
+mat1 = loadmat('c/0.2_138.mat')
+Omega = mat1['M']
 ctr = 0
 pos = 0
 for i in range(np.shape(Omega)[0]):
@@ -18,17 +17,11 @@ for i in range(np.shape(Omega)[0]):
 			ctr = ctr+1
 			if Omega[i,j]>0:
 				pos = pos+1
-			# print(str(i)+','+str(j)+': '+str(Omega[i,j]))
 print(Omega[:5,:5])
 print(pos)
 print(ctr)
 
-pMask = loadmat('/Users/LSK/Dropbox/glasso/pMask.mat')
-pMat = pMask['M'] #3403*3403
-pMat[pMat==0] = 100
-np.fill_diagonal(pMat, 0)
-
-mat2 = loadmat('/Users/LSK/Dropbox/glasso/concord_results/WM/data.mat')
+mat2 = loadmat('lw/data_lw.mat')
 D = mat2['M']
 # Standardize
 S = D-np.tile(np.mean(D, axis=0),(np.shape(D)[0],1))
@@ -42,7 +35,7 @@ print(term2)
 print(term1+term2)
 
 # L1 penalty
-p_term = np.multiply(np.abs(Omega),lam*pMat)
+p_term = np.abs(Omega)*lam
 L1_with_lam = sum(sum(p_term))
 L1_penalty = sum(sum(np.abs(Omega)))
 print(L1_with_lam)

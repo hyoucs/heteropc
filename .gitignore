@@ -6,3 +6,12 @@ coverage
 yarn.lock
 .vscode
 .DS_store
+*.pyc
+.Rhistory
+
+concord/result/
+concord/pMask/
+
+archive/synthetic_outlier/ss/
+archive/synthetic_outlier/lw/
+archive/synthetic_outlier/sw/
